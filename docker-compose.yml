@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app           # mount your local source into the container
+      - /app/node_modules        # keep container's node_modules
+    environment:
+      - VITE_BACKEND_URL=http://localhost:8090  # Use localhost for client-side requests
+    networks:
+      - app-network
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8090:8090"
+    volumes:
+      - pb_data:/app/pb_data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+
+volumes:
+  pb_data:
