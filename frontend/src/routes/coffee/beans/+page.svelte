@@ -38,9 +38,9 @@
     </p>
     
 {/if}
-<a href="/">
+<a href="/coffee">
     <button class = "nb-button default small">
-        Back to the start
+        Back to the coffee
     </button>
 </a>
 </div>

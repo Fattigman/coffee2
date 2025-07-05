@@ -30,7 +30,7 @@
 
 
 <div >
-    <Card class= "card">
+    <Card class= "card home">
     {#if $currentUser}
       <div class="card-content">
         <div >
@@ -40,6 +40,9 @@
           </p>
           <a href="/coffee">
             <button class="nb-button default" >Go to coffe runs</button>
+          </a>
+          <a href="/coffee/beans">
+            <button class="nb-button default" >Go to beans</button>
           </a>
         </div>
       </div>

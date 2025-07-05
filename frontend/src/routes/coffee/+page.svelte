@@ -24,9 +24,13 @@
           date: {coffee.date}
           bean: {coffee.expand.bean.name}
         {/each}
+        
     {:catch error}
     <p style="color: red">{error.message}</p>
     {/await}
+    <a href="/coffee/beans">
+        <button class="nb-button default" >Go to beans</button>
+    </a>
 {:else}
     <p>
         Please login
