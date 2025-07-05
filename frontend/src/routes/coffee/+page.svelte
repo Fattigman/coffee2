@@ -17,12 +17,24 @@
     {:then data}
         {#each data as coffee, i }
           <br>
-          {i + 1}. 
-          flow time: {coffee.flow_time}
-          grind size: {coffee.grind_size}
-          taste: {coffee.taste}
-          date: {coffee.date}
-          bean: {coffee.expand.bean.name}
+          <ul>
+          {i + 1}.
+            <li>
+                flow time: {coffee.flow_time}
+            </li>
+            <li>
+                grind size: {coffee.grind_size}
+            </li>
+            <li>
+                taste: {coffee.taste}
+            </li>
+            <li>
+                date: {coffee.date}
+            </li>
+            <li>
+                bean: {coffee.expand.bean.name}
+            </li>
+          </ul>
         {/each}
         
     {:catch error}
