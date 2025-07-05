@@ -1,9 +1,10 @@
-FROM rocker/plumber
+# ./rservice/Dockerfile
+FROM rstudio/plumber
 
 WORKDIR /app
 
-COPY plumber.R .
+COPY . .
 
 EXPOSE 8000
 
-ENTRYPOINT ["R", "-e", "pr <- plumber::plumb('plumber.R'); pr$run(host='0.0.0.0', port=8000)"]
+CMD ["./main.R"]

@@ -28,7 +28,10 @@ services:
   rservice:
     build: ./rservice
     ports:
-      -"8000:8000"
+      - "8000:8000"
+    networks:
+    - app-network
+
 
 networks:
   app-network:

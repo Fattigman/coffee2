@@ -1,24 +1,31 @@
 # plumber.R
-library(plumber)
 
-pr <- plumber$new()
 
-pr$handle("post", "/calculate", function(req, res){
-  x <- as.numeric(req$body$x)
-  y <- as.numeric(req$body$y)
-  res$body <- list(result = x + y)
-  res
-})
+#* @filter cors
+cors <- function(res) {
+    res$setHeader("Access-Control-Allow-Origin", "*")
+    plumber::forward()
+}
 
-# Add CORS
-pr$registerHooks(
-  list(
-    preroute = function(req, res) {
-      res$setHeader("Access-Control-Allow-Origin", "*")
-      res$setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-      res$setHeader("Access-Control-Allow-Headers", "Content-Type")
-    }
-  )
-)
+#* Echo back the input
+#* @param msg The message to echo
+#* @get /echo
+function(msg="") {
+  list(msg = paste0("The message is: '", msg, "'"))
+}
 
-pr
+#* Plot a histogram
+#* @serializer png
+#* @get /plot
+function() {
+  rand <- rnorm(100)
+  hist(rand)
+}
+
+#* Return the sum of two numbers
+#* @param a The first number to add
+#* @param b The second number to add
+#* @post /sum
+function(a, b) {
+  as.numeric(a) + as.numeric(b)
+}
