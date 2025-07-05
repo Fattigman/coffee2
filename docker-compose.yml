@@ -25,6 +25,10 @@ services:
       - pb_data:/app/pb_data
     networks:
       - app-network
+  rservice:
+    build: ./rservice
+    ports:
+      -"8000:8000"
 
 networks:
   app-network:
