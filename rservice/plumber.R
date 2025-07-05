@@ -2,9 +2,17 @@
 
 
 #* @filter cors
-cors <- function(res) {
-    res$setHeader("Access-Control-Allow-Origin", "*")
-    plumber::forward()
+cors <- function(req, res) {
+  res$setHeader("Access-Control-Allow-Origin", "*")
+  res$setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+  res$setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization")
+
+  if (req$REQUEST_METHOD == "OPTIONS") {
+    res$status <- 200
+    return(list())  # ends the request here
+  }
+
+  plumber::forward()
 }
 
 #* Echo back the input
@@ -23,9 +31,11 @@ function() {
 }
 
 #* Return the sum of two numbers
+#* @parser json
 #* @param a The first number to add
 #* @param b The second number to add
 #* @post /sum
 function(a, b) {
-  as.numeric(a) + as.numeric(b)
+  sumVal <- as.numeric(a) + as.numeric(b)
+  list(result = sumVal)
 }
